@@ -8,10 +8,11 @@ import '../shared/shop_bloc/states.dart';
 import '../style/color.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
-  static var name = TextEditingController();
-  static var email = TextEditingController();
-  static var phone = TextEditingController();
+
+   ProfileScreen({Key? key}) : super(key: key);
+  final name = TextEditingController();
+  final email = TextEditingController();
+  final phone = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   CircleAvatar(
                     radius: 50,
@@ -56,9 +57,7 @@ class ProfileScreen extends StatelessWidget {
                       keyboard: TextInputType.name,
                       textColor: defShopColor,
                       suffixIcon: Icons.person_outline_sharp,
-                      suffixColor: defShopColor),
-                  const SizedBox(
-                    height: 20,
+                      suffixColor: defShopColor,
                   ),
                   defTextField(
                       validate: 'email',
@@ -68,9 +67,7 @@ class ProfileScreen extends StatelessWidget {
                       borderColor: defShopColor,
                       keyboard: TextInputType.emailAddress,
                       suffixIcon: Icons.email_outlined,
-                      suffixColor: defShopColor),
-                  const SizedBox(
-                    height: 20,
+                      suffixColor: defShopColor,
                   ),
                   defTextField(
                       validate: 'phone',

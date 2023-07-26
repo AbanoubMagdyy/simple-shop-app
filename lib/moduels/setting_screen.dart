@@ -127,7 +127,8 @@ class SettingScreen extends StatelessWidget {
                     ),
                   ),
             ),
-            fallback: (context) => fallBack());
+            fallback: (context) => fallBack()
+        );
       },
     );
   }

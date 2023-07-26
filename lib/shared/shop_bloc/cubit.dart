@@ -25,7 +25,7 @@ class ShopCubit extends Cubit<ShopStates> {
   List<Widget> screens = [
     const HomeScreen(),
     const FavouritesScreen(),
-    const ProfileScreen(),
+     ProfileScreen(),
     const SettingScreen(),
   ];
 
@@ -103,7 +103,6 @@ class ShopCubit extends Cubit<ShopStates> {
           element.id! : element.inFavorites!
         });
       });
-      print(fav.toString());
       emit(GetProductsSuccess());
     }).catchError((error){
       if (kDebugMode) {

@@ -41,22 +41,11 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// categories
-                  Row(
-                    children: [
-                      const Text(
-                        'All Categories',
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        'View all >',
-                        style: TextStyle(
-                          color: defShopColor,
-                        ),
-                      ),
-                    ],
+                  const Text(
+                    'All Categories',
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
                   ),
                   const SizedBox(
                     height: 15,
@@ -74,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                                 .data!
                                 .data[index]),
                         separatorBuilder: (context, index) => const SizedBox(
-                              width: 15,
+                              width: 25,
                             ),
                         itemCount: ShopCubit.get(context)
                             .categoriesModel!

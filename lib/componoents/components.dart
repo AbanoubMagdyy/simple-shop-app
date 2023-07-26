@@ -22,33 +22,36 @@ Widget defTextField({
   IconData? suffixIcon,
   Function(String)? onFieldSubmitted,
 }) =>
-    TextFormField(
-      controller: controller,
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return validate;
-        }
-        return null;
-      },
-      keyboardType: keyboard,
-      style: TextStyle(color: textColor),
-      decoration: InputDecoration(
-          disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(color: borderColor, width: 2)),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(color: borderColor, width: 2)),
-          enabled: enabled,
-          hintText: hintText,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius)),
-          labelText: labelText,
-          suffixIcon: Icon(
-            suffixIcon,
-            color: suffixColor,
-          )),
-      onFieldSubmitted: onFieldSubmitted,
+    Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: TextFormField(
+        controller: controller,
+        validator: (String? value) {
+          if (value!.isEmpty) {
+            return validate;
+          }
+          return null;
+        },
+        keyboardType: keyboard,
+        style: TextStyle(color: textColor),
+        decoration: InputDecoration(
+            disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),
+                borderSide: BorderSide(color: borderColor, width: 2)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),
+                borderSide: BorderSide(color: borderColor, width: 2)),
+            enabled: enabled,
+            hintText: hintText,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius)),
+            labelText: labelText,
+            suffixIcon: Icon(
+              suffixIcon,
+              color: suffixColor,
+            )),
+        onFieldSubmitted: onFieldSubmitted,
+      ),
     );
 
 Widget defButton({

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_shop_app/shared/bolc_observer.dart';
@@ -23,25 +23,30 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   bool onBoarding = SharedHelper.getAllData(key: 'onBoarding') ?? false;
   token = SharedHelper.getAllData(key: 'token');
-  print(token);
-  Widget? widget;
-  if (onBoarding != null) {
-    if (token != null) {
-      widget = const ShopScreen();
-    } else {
-      widget = const HelloScreen();
-    }
-  } else {
-    widget = const OnBoardingScreen();
+  if (kDebugMode) {
+    print(token);
   }
+
+  Widget? widget;
+  if (onBoarding == false) {
+    widget = const OnBoardingScreen();
+  } else {
+    if (token == null) {
+      widget = const HelloScreen();
+    } else {
+      widget = const ShopScreen();
+    }
+  }
+
   runApp(MyApp(
     startScreen: widget,
   ));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key, required this.startScreen}) : super(key: key);
-  Widget startScreen;
+  const MyApp({Key? key, required this.startScreen}) : super(key: key);
+
+  final Widget startScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +63,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: startScreen,
             theme: ThemeData(
+                primarySwatch: Colors.pink,
                 fontFamily: 'bob',
                 textTheme:
-                    TextTheme(bodyLarge: TextStyle(color: defShopColor))),
+                    TextTheme(bodyLarge: TextStyle(color: defShopColor),),),
           );
         },
       ),

@@ -15,9 +15,9 @@ import 'login_state.dart';
 class ShopSignInScreen extends StatelessWidget {
   ShopSignInScreen({Key? key}) : super(key: key);
 
-  static var email = TextEditingController();
-  static var password = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final email = TextEditingController();
+   final password = TextEditingController();
+   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -63,183 +63,78 @@ class ShopSignInScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Sign In',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 45,
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey, spreadRadius: 1)
-                                  ]),
-                              child: Row(
-                                children: const [
-                                  Image(
-                                    image:
-                                        AssetImage('assets/image/google.png'),
-                                    width: 25,
-                                  ),
-                                  Expanded(
-                                      child: Text(
-                                    'Google',
-                                    textAlign: TextAlign.center,
-                                  ))
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 45,
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey, spreadRadius: 1)
-                                  ]),
-                              child: Row(
-                                children: const [
-                                  Image(
-                                    image:
-                                        AssetImage('assets/image/facebook.png'),
-                                    width: 25,
-                                  ),
-                                  Expanded(
-                                      child: Text(
-                                    'Facebook',
-                                    textAlign: TextAlign.center,
-                                  ))
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              color: Colors.grey,
-                              height: 1,
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              'or',
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 20),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.grey,
-                              height: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text('Email'),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      defTextField(
-                        controller: email,
-                        validate: 'Email must be not Empty',
-                        hintText: 'name@gmail.com',
-                        borderRadius: 5,
-                        keyboard: TextInputType.emailAddress,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text('Password'),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      defTextField(
-                          controller: password,
-                          validate: 'Password must be not Empty',
-                          hintText: 'Enter password',
+            body: Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Log In',
+                          style: TextStyle(fontSize: 25),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        const Text('Email'),
+                        defTextField(
+                          controller: email,
+                          validate: 'Email must be not Empty',
+                          hintText: 'name@gmail.com',
                           borderRadius: 5,
-                          keyboard: TextInputType.visiblePassword),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ConditionalBuilder(
-                            condition: state is! LeadingLogin,
-                            fallback: (context) => Center(
-                              child: SimpleCircularProgressBar(
-                                startAngle: 45,
-                                size: 30,
-                                backColor: defShopColor,
-                                progressColors: const [
-                                  Colors.white,
-                                  Colors.redAccent,
-                                ],
+                          keyboard: TextInputType.emailAddress,
+                        ),
+                        const Text('Password'),
+                        defTextField(
+                            controller: password,
+                            validate: 'Password must be not Empty',
+                            hintText: 'Enter password',
+                            borderRadius: 5,
+                            keyboard: TextInputType.visiblePassword),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ConditionalBuilder(
+                              condition: state is! LeadingLogin,
+                              fallback: (context) => Center(
+                                child: SimpleCircularProgressBar(
+                                  startAngle: 45,
+                                  size: 30,
+                                  backColor: defShopColor,
+                                  progressColors: const [
+                                    Colors.white,
+                                    Colors.redAccent,
+                                  ],
+                                ),
                               ),
+                              builder: (context) => defButton(
+                                  text: 'Sign In',
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      LoginCubit.get(context).getLoginData(
+                                        email: email.text,
+                                        password: password.text,
+                                      );
+                                    }
+                                  },
+                                  color: defShopColor,
+                                  radius: 5),
                             ),
-                            builder: (context) => defButton(
-                                text: 'Sign In',
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            MaterialButton(
                                 onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    LoginCubit.get(context).getLoginData(
-                                      email: email.text,
-                                      password: password.text,
-                                    );
-                                  }
+                                  navigateTo(context, RegisterScreen());
                                 },
-                                color: defShopColor,
-                                radius: 5),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const Text('Forgot password?'),
-                          const SizedBox(
-                            height: 35,
-                          ),
-                          MaterialButton(
-                              onPressed: () {
-                                navigateTo(context, RegisterScreen());
-                              },
-                              child: const Text('Don\'t have an account?')),
-                        ],
-                      ),
-                    ],
+                                child: const Text('Don\'t have an account?')),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

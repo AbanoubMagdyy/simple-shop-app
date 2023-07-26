@@ -15,11 +15,11 @@ import '../sign_in/sign_in_screen.dart';
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
-  static var email = TextEditingController();
-  static var password = TextEditingController();
-  static var phone = TextEditingController();
-  static var name = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final phone = TextEditingController();
+  final name = TextEditingController();
+ final  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +83,6 @@ class RegisterScreen extends StatelessWidget {
                           height: 15,
                         ),
                         const Text('Name'),
-                        const SizedBox(
-                          height: 5,
-                        ),
                         defTextField(
                           controller: name,
                           validate: 'Name must be not Empty',
@@ -93,13 +90,7 @@ class RegisterScreen extends StatelessWidget {
                           borderRadius: 5,
                           keyboard: TextInputType.name,
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
                         const Text('Email'),
-                        const SizedBox(
-                          height: 5,
-                        ),
                         defTextField(
                           controller: email,
                           validate: 'Email must be not Empty',
@@ -107,13 +98,7 @@ class RegisterScreen extends StatelessWidget {
                           borderRadius: 5,
                           keyboard: TextInputType.emailAddress,
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
                         const Text('Phone'),
-                        const SizedBox(
-                          height: 5,
-                        ),
                         defTextField(
                           controller: phone,
                           validate: 'Phone must be not Empty',
@@ -121,22 +106,13 @@ class RegisterScreen extends StatelessWidget {
                           borderRadius: 5,
                           keyboard: TextInputType.phone,
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
                         const Text('Password'),
-                        const SizedBox(
-                          height: 5,
-                        ),
                         defTextField(
                             controller: password,
                             validate: 'Password must be not Empty',
                             hintText: 'min, 8 characters ',
                             borderRadius: 5,
                             keyboard: TextInputType.visiblePassword),
-                        const SizedBox(
-                          height: 15,
-                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -170,102 +146,11 @@ class RegisterScreen extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.grey,
-                                    height: 1,
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  child: Text(
-                                    'or',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 20),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.grey,
-                                    height: 1,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    height: 45,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey, spreadRadius: 1)
-                                        ]),
-                                    child: Row(
-                                      children: const [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/image/google.png'),
-                                          width: 25,
-                                        ),
-                                        Expanded(
-                                            child: Text(
-                                          'Google',
-                                          textAlign: TextAlign.center,
-                                        ))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    height: 45,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey, spreadRadius: 1)
-                                        ]),
-                                    child: Row(
-                                      children: const [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/image/facebook.png'),
-                                          width: 25,
-                                        ),
-                                        Expanded(
-                                            child: Text(
-                                          'Facebook',
-                                          textAlign: TextAlign.center,
-                                        ))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
                             MaterialButton(
                                 onPressed: () {
                                   navigateTo(context, ShopSignInScreen());
                                 },
-                                child: const Text('Do you have an account?')),
+                                child: const Text('Do you have an account?'),),
                           ],
                         ),
                       ],
