@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_shop_app/moduels/search/states.dart';
+import 'package:shop_app/shared/search_bloc/search_states.dart';
 import '../../../componoents/constants.dart';
 import '../../../models/search_screen.dart';
 import '../../../network/remote/dio_shop_app.dart';

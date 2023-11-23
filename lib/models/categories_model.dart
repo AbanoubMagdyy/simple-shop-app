@@ -2,6 +2,7 @@ class CategoriesModel {
   bool? status;
   Data? data;
 
+  CategoriesModel(this.status,this.data) ;
   CategoriesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     data = Data.fromJson(json['data']);

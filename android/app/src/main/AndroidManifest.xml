@@ -1,9 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.simple_shop_app.simple_shop_app">
-   <application
-        android:label="simple_shop_app"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:label="Shop App"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

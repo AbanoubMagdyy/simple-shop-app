@@ -1,0 +1,140 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../componoents/components.dart';
+import '../../style/color.dart';
+import '../componoents/constants.dart';
+import '../shared/shop_bloc/cubit.dart';
+import '../shared/shop_bloc/states.dart';
+
+class SettingScreen extends StatelessWidget {
+  final name = TextEditingController();
+  final email = TextEditingController();
+  final phone = TextEditingController();
+  final double requiredHeight = 450;
+
+  SettingScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<ShopCubit, ShopStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var model = ShopCubit.get(context).model;
+        email.text = model?.data?.email ?? '';
+        name.text = model?.data?.name ?? '';
+        phone.text = model?.data?.phone ?? '';
+        return Visibility(
+          visible: model != null,
+          replacement: fallBack(),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final double availableHeight = constraints.maxHeight;
+              double imageHeight = availableHeight / 6;
+
+              return Container(
+                color: defShopColor,
+                child: Column(
+                  children: [
+                    /// image
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadiusDirectional.circular(25),
+                            ),
+                            child: getNetworkImage(
+                                url: model?.data?.image ??
+                                    'https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=740&t=st=1700507653~exp=1700508253~hmac=68d29f316c1451290b4e92a6e1c57eab2892a967f87189e83563460ba95761e3',
+                                height: imageHeight),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    if (requiredHeight < availableHeight)
+
+                      /// bottom sheet
+                      Container(
+                        padding: const EdgeInsetsDirectional.all(20),
+                        decoration: BoxDecoration(
+                          color: secondShopColor,
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(30),
+                          ),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              defTextField(
+                                controller: name,
+                                textColor: defShopColor,
+                                borderColor: defShopColor,
+                                keyboard: TextInputType.name,
+                                suffixIcon: Icons.person_outline_sharp,
+                                suffixColor: defShopColor,
+                              ),
+                              defTextField(
+                                  controller: email,
+                                  borderColor: defShopColor,
+                                  textColor: defShopColor,
+                                  keyboard: TextInputType.emailAddress,
+                                  suffixIcon: Icons.email_outlined,
+                                  suffixColor: defShopColor,
+                              ),
+                              defTextField(
+                                  controller: phone,
+                                  borderColor: defShopColor,
+                                  keyboard: TextInputType.phone,
+                                  suffixIcon: Icons.phone,
+                                  textColor: defShopColor,
+                                  suffixColor: defShopColor,
+                              ),
+                              if (state is UpDataLeading)
+                                defLinearProgressIndicator(),
+                              if (state is UpDataLeading)
+                                const SizedBox(
+                                  height: 25,
+                                ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: defButton(
+                                      text: 'Log out',
+                                      onPressed: () => logout(context),
+                                      color: defShopColor,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                      child: defButton(
+                                          text: 'Update',
+                                          onPressed: () {
+                                            ShopCubit.get(context)
+                                                .updateUserData(
+                                                    name: name.text,
+                                                    email: email.text,
+                                                    phone: phone.text);
+                                          },
+                                          color: defShopColor))
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}

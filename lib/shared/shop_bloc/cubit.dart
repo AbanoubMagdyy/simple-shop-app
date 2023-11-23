@@ -1,18 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_shop_app/shared/shop_bloc/states.dart';
+import 'package:shop_app/shared/shop_bloc/states.dart';
 import '../../componoents/constants.dart';
 import '../../models/categories_model.dart';
 import '../../models/chang_fav_model.dart';
 import '../../models/favorites_model.dart';
 import '../../models/home_model.dart';
 import '../../models/login_model.dart';
-import '../../moduels/favourites_screen.dart';
-import '../../moduels/home_screen.dart';
-import '../../moduels/profile_screen.dart';
-import '../../moduels/setting_screen.dart';
 import '../../network/remote/dio_shop_app.dart';
+import '../../screens/favourites_screen.dart';
+import '../../screens/home_screen.dart';
+import '../../screens/profile_screen.dart';
+import '../../screens/setting_screen.dart';
 import '../end_points.dart';
 
 class ShopCubit extends Cubit<ShopStates> {
@@ -26,7 +26,7 @@ class ShopCubit extends Cubit<ShopStates> {
     const HomeScreen(),
     const FavouritesScreen(),
      ProfileScreen(),
-    const SettingScreen(),
+     SettingScreen(),
   ];
 
   int selectedIndex = 0;
@@ -37,7 +37,8 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   LoginModel? model;
-  void upData({
+
+  void updateUserData({
     required String name,
     required String email,
     required String phone,
@@ -58,7 +59,7 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  void getData() {
+  void getUserData() {
     emit(GetLeading());
     ShopDio.getData(url: profile, token: token)?.then((value) {
       model = LoginModel.fromJson(value?.data);
@@ -70,9 +71,7 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(GetError());
     });
   }
-
-  CategoriesModel? categoriesModel;
-
+   CategoriesModel? categoriesModel;
   void getCategories() {
     emit(GetCategoriesLeading());
     ShopDio.getData(
@@ -85,7 +84,8 @@ class ShopCubit extends Cubit<ShopStates> {
         print(error.toString());
       }
       emit(GetCategoriesError());
-    });
+    },
+    );
   }
 
 
@@ -93,16 +93,15 @@ class ShopCubit extends Cubit<ShopStates> {
   HomeModel? homeModel;
   Map<int,bool> fav={};
 
-
   void getProducts(){
     emit(GetProductsLeading());
     ShopDio.getData(url: home,token: token)?.then((value) {
       homeModel = HomeModel.fromJson(value?.data);
-      homeModel?.data?.products.forEach((element) {
+      for (var element in homeModel!.data!.products) {
         fav.addAll({
           element.id! : element.inFavorites!
         });
-      });
+      }
       emit(GetProductsSuccess());
     }).catchError((error){
       if (kDebugMode) {

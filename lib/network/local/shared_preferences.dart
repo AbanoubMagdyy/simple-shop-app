@@ -7,17 +7,6 @@ class SharedHelper {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static Future<bool?> putData({
-    required String key,
-    required bool value,
-  }) async {
-    return await sharedPreferences?.setBool(key, value);
-  }
-
-  static bool? getData({required String key,}) {
-    return sharedPreferences?.getBool(key);
-  }
-
   static Future<bool>? saveData({
   required String key,
   required dynamic value,

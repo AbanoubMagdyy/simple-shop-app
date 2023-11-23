@@ -4,6 +4,8 @@ abstract class LoginStates {}
 
 class InitLoginState extends LoginStates {}
 
+class ChangeIcon extends LoginStates {}
+
 class LeadingLogin extends LoginStates {}
 
 class SuccessLogin extends LoginStates {
